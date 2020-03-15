@@ -22,6 +22,26 @@ Usage of vertica-prometheus-exporter:
         Vertica username (default "dbadmin")
 ```
 
+Running this application will serve Prometheus metrics in a fashion such as below:
+```
+vertica_node_state{node_id="45035996273704978", node_name="v_docker_node0001"} 1
+vertica_wos_used_bytes 0
+vertica_last_good_epoch 16
+vertica_node_count 1
+vertica_catalog_revision_number 726
+vertica_current_epoch 17
+vertica_ahm_epoch 16
+vertica_current_fault_tolerance 0
+vertica_wos_row_count 0
+vertica_refresh_epoch -1
+vertica_ros_row_count 0
+vertica_total_used_bytes 0
+vertica_designed_fault_tolerance 0
+vertica_node_down_count 0
+vertica_ros_used_bytes 0
+vertica_total_row_count 0
+```
+
 ## Build
 
 
