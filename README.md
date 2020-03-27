@@ -40,6 +40,10 @@ vertica_designed_fault_tolerance 0
 vertica_node_down_count 0
 vertica_ros_used_bytes 0
 vertica_total_row_count 0
+vertica_request_duration_ms{user_name="dbadmin"} 16275
+vertica_memory_acquired_mb{user_name="dbadmin"} 18284
+vertica_request_duration_ms{user_name="testuser"} 216
+vertica_memory_acquired_mb{user_name="testuser"} 500
 ```
 
 ## Build

@@ -46,6 +46,10 @@ func serveMetrics(location, listen string, db sqlx.DB) {
 		}
 		metrics = append(metrics, monitoring.NewVerticaSystem(&db))
 
+		for _, queryRequest := range monitoring.NewQueryRequests(&db) {
+			metrics = append(metrics, queryRequest)
+		}
+
 		for _, obj := range metrics {
 			metric := obj.ToMetric()
 			for key, value := range metric {
