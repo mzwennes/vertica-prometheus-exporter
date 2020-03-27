@@ -50,6 +50,10 @@ func serveMetrics(location, listen string, db sqlx.DB) {
 			metrics = append(metrics, queryRequest)
 		}
 
+		for _, usage := range monitoring.NewPoolUsage(&db) {
+			metrics = append(metrics, usage)
+		}
+
 		for _, obj := range metrics {
 			metric := obj.ToMetric()
 			for key, value := range metric {

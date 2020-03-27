@@ -38,7 +38,7 @@ func (pr PoolRejection) ToMetric() map[string]int {
 
 	node := fmt.Sprintf("node_name=%q", pr.NodeName)
 	pool := fmt.Sprintf("pool_name=%q", pr.PoolName)
-	metrics[fmt.Sprintf("vertica_rejection_count{%s, %s}", node, pool)] = pr.RejectionCount
+	metrics[fmt.Sprintf("vertica_pool_rejection_count{%s, %s}", node, pool)] = pr.RejectionCount
 
 	return metrics
 }

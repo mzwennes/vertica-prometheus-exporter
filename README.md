@@ -44,6 +44,10 @@ vertica_request_duration_ms{user_name="dbadmin"} 16275
 vertica_memory_acquired_mb{user_name="dbadmin"} 18284
 vertica_request_duration_ms{user_name="testuser"} 216
 vertica_memory_acquired_mb{user_name="testuser"} 500
+vertica_pool_running_query_count{node_name="v_docker_node0001", pool_name="general"} 0
+vertica_pool_memory_inuse_kb{node_name="v_docker_node0001", pool_name="general"} 0
+vertica_pool_memory_borrowed_kb{node_name="v_docker_node0001", pool_name="general"} 0
+vertica_pool_memory_inuse_kb{node_name="v_docker_node0001", pool_name="sysquery"} 0
 ```
 
 ## Build
