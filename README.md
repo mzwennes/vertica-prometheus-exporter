@@ -62,6 +62,11 @@ Or you can create a Docker image:
 ```
 docker build -t vertica-prometheus-exporter .
 ```
+Alternatively you can pull the image directly from Github:
+
+```
+docker pull docker.pkg.github.com/zwennesm/vertica-prometheus-exporter/vertica-prometheus-exporter:latest
+```
 
 The newly created Docker image can then be started (note the use of `ENV variables`):
 
