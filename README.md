@@ -6,19 +6,19 @@ Exports important `Vertica` metrics in Prometheus format.
 ```
 go run main.go -h              
 Usage of vertica-prometheus-exporter:
-  -database string
-        Vertica database name (default "vertica")
-  -host string
-        Vertica hostname (default "localhost")
-  -listen string
-        Address to listen on (default "0.0.0.0:8080")
   -location string
         Metrics path (default "/metrics")
-  -password string
+  -listen string
+        Address to listen on (default "0.0.0.0:8080")
+  -db_name string
+        Vertica database name (default "vertica")
+  -db_host string
+        Vertica hostname (default "localhost")
+  -db_password string
         Vertica password (default "dbadmin")
-  -port int
+  -db_port int
         Vertica port (default 5433)
-  -user string
+  -db_user string
         Vertica username (default "dbadmin")
 ```
 
@@ -43,10 +43,30 @@ vertica_total_row_count 0
 ```
 
 ## Build
+The application can be built locally with:
 
+```
+go build
+```
+
+Or you can create a Docker image:
+
+```
+docker build -t vertica-prometheus-exporter .
+```
+
+The newly created Docker image can then be started (note the use of `ENV variables`):
+
+```
+docker run --rm --network host --name vertica-prometheus-exporter \
+      -e DB_NAME=docker \
+      vertica-prometheus-exporter:latest
+```
 
 ## Development
+
 A local Vertica database can be deployed for testing using the following command:
+
 ```
 docker run --name vertica --network host -p 5433:5433 -d jbfavre/vertica:9.2.0-7_debian-8
 ```
