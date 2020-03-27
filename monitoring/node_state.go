@@ -9,7 +9,7 @@ import (
 
 // NodeState contains information about each node in a Vertica cluster.
 type NodeState struct {
-	NodeID    string `db:"node_id""`
+	NodeID    string `db:"node_id"`
 	NodeName  string `db:"node_name"`
 	NodeState int    `db:"node_state"`
 }
