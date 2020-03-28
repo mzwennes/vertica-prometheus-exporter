@@ -50,30 +50,45 @@ vertica_pool_memory_borrowed_kb{node_name="v_docker_node0001", pool_name="genera
 vertica_pool_memory_inuse_kb{node_name="v_docker_node0001", pool_name="sysquery"} 0
 ```
 
-## Build
+## Build locally
 The application can be built locally with:
 
 ```
 go build
 ```
 
-Or you can create a Docker image:
+Build the Docker image:
 
 ```
 docker build -t vertica-prometheus-exporter .
 ```
-Alternatively you can pull the image directly from Github:
+
+## Running with Docker
+
+Either use the locally built image, or download a pre-made image from the Github container repository.
 
 ```
 docker pull docker.pkg.github.com/zwennesm/vertica-prometheus-exporter/vertica-prometheus-exporter:latest
 ```
 
-The newly created Docker image can then be started (note the use of `ENV variables`):
+Then run the docker image with optional `environment variables`:
 
 ```
 docker run --rm --network host --name vertica-prometheus-exporter \
       -e DB_NAME=docker \
       vertica-prometheus-exporter:latest
+```
+
+## Running the binaries
+You can either run the Docker image or download and start the application directly. Each new release contains binaries for different architectures.
+
+Example of downloading and running the latest version (`linux_386`):
+```
+wget https://github.com/zwennesm/vertica-prometheus-exporter/releases/download/v0.3/vertica-prometheus-exporter_v0.3_linux_386.tar.gz
+
+tar -xvf vertica-prometheus-exporter_v0.3_linux_386.tar.gz
+
+./vertica-prometheus-exporter
 ```
 
 ## Development
@@ -83,3 +98,5 @@ A local Vertica database can be deployed for testing using the following command
 ```
 docker run --name vertica --network host -p 5433:5433 -d jbfavre/vertica:9.2.0-7_debian-8
 ```
+
+Note: The default database name is `docker`.
