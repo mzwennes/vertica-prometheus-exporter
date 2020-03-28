@@ -1,27 +1,9 @@
-name: CI
+name: Build Go Binaries
 
-on:
-  push:
-    branches: [ master ]
-    tags:
-      - 'v*'
+on: release
 
+name: Build Go binaries
 jobs:
-  release:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@latest
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: false
-        prerelease: false
-
   release-linux-386:
     name: release linux/386
     runs-on: ubuntu-latest
@@ -33,7 +15,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
         GOOS: linux
-  
   release-linux-amd64:
     name: release linux/amd64
     runs-on: ubuntu-latest
@@ -45,7 +26,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
         GOOS: linux
-  
   release-darwin-386:
     name: release darwin/386
     runs-on: ubuntu-latest
@@ -57,7 +37,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
         GOOS: darwin
-  
   release-darwin-amd64:
     name: release darwin/amd64
     runs-on: ubuntu-latest
@@ -69,7 +48,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: amd64
         GOOS: darwin
-  
   release-windows-386:
     name: release windows/386
     runs-on: ubuntu-latest
@@ -81,7 +59,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         GOARCH: "386"
         GOOS: windows
-  
   release-windows-amd64:
     name: release windows/amd64
     runs-on: ubuntu-latest
