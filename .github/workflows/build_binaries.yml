@@ -1,8 +1,6 @@
 name: Build Go Binaries
-
 on: release
 
-name: Build Go binaries
 jobs:
   release-linux-386:
     name: release linux/386
