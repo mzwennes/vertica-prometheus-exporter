@@ -37,23 +37,7 @@ func main() {
 func serveMetrics(location, listen string, db sqlx.DB) {
 
 	h := func(w http.ResponseWriter, r *http.Request) {
-		metrics := []monitoring.PrometheusMetric{}
-		for _, state := range monitoring.NewNodeState(&db) {
-			metrics = append(metrics, state)
-		}
-		for _, rejection := range monitoring.NewPoolRejections(&db) {
-			metrics = append(metrics, rejection)
-		}
-		metrics = append(metrics, monitoring.NewVerticaSystem(&db))
-
-		for _, queryRequest := range monitoring.NewQueryRequests(&db) {
-			metrics = append(metrics, queryRequest)
-		}
-
-		for _, usage := range monitoring.NewPoolUsage(&db) {
-			metrics = append(metrics, usage)
-		}
-
+		metrics := monitoring.NewPrometheusMetrics(db)
 		for _, obj := range metrics {
 			metric := obj.ToMetric()
 			for key, value := range metric {

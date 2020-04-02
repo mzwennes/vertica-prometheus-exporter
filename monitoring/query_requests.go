@@ -34,7 +34,7 @@ func NewQueryRequests(db *sqlx.DB) []QueryRequest {
 	return queryRequests
 }
 
-// ToMetric vonerts QueryRequest to a Map.
+// ToMetric converts QueryRequest to a Map.
 func (qr QueryRequest) ToMetric() map[string]int {
 	metrics := map[string]int{}
 
