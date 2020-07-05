@@ -19,8 +19,8 @@ func NewQueryRequests(db *sqlx.DB) []QueryRequest {
 	sql := `
 	SELECT
 		user_name, 
-		SUM(request_duration_ms)::INT request_duration_ms, 
-		SUM(memory_acquired_mb)::INT memory_acquired_mb 
+		SUM(COALESCE(request_duration_ms,0))::INT request_duration_ms, 
+		SUM(COALESCE(memory_acquired_mb,0))::INT memory_acquired_mb 
 	FROM v_monitor.query_requests 
 	GROUP BY user_name;
 	`
