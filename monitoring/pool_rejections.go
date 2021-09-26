@@ -33,12 +33,12 @@ func NewPoolRejections(db *sqlx.DB) []PoolRejection {
 }
 
 // ToMetric converts PoolRejection to a Map.
-func (pr PoolRejection) ToMetric() map[string]int {
-	metrics := map[string]int{}
+func (pr PoolRejection) ToMetric() map[string]float32 {
+	metrics := map[string]float32{}
 
 	node := fmt.Sprintf("node_name=%q", pr.NodeName)
 	pool := fmt.Sprintf("pool_name=%q", pr.PoolName)
-	metrics[fmt.Sprintf("vertica_pool_rejection_count{%s, %s}", node, pool)] = pr.RejectionCount
+	metrics[fmt.Sprintf("vertica_pool_rejection_count{%s, %s}", node, pool)] = float32(pr.RejectionCount)
 
 	return metrics
 }

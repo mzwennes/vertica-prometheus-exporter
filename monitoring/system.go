@@ -41,11 +41,11 @@ func NewVerticaSystem(db *sqlx.DB) VerticaSystem {
 }
 
 // ToMetric converts VerticaSystem to a Map.
-func (sys VerticaSystem) ToMetric() map[string]int {
-	metrics := map[string]int{}
+func (sys VerticaSystem) ToMetric() map[string]float32 {
+	metrics := map[string]float32{}
 
 	for k, v := range structs.Map(sys) {
-		metrics[fmt.Sprintf("vertica_%s", ToSnakeCase(k))] = v.(int)
+		metrics[fmt.Sprintf("vertica_%s", ToSnakeCase(k))] = float32(v.(int))
 	}
 
 	return metrics

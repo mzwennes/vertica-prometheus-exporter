@@ -33,12 +33,12 @@ func NewNodeState(db *sqlx.DB) []NodeState {
 }
 
 // ToMetric converts NodeState to a Map.
-func (ns NodeState) ToMetric() map[string]int {
-	metrics := map[string]int{}
+func (ns NodeState) ToMetric() map[string]float32 {
+	metrics := map[string]float32{}
 
 	id := fmt.Sprintf("node_id=%q", ns.NodeID)
 	name := fmt.Sprintf("node_name=%q", ns.NodeName)
-	metrics[fmt.Sprintf("vertica_node_state{%s, %s}", id, name)] = ns.NodeState
+	metrics[fmt.Sprintf("vertica_node_state{%s, %s}", id, name)] = float32(ns.NodeState)
 
 	return metrics
 }
