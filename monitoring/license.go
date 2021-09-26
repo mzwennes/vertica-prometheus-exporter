@@ -11,13 +11,13 @@ import (
 
 // PoolUsage shows gneral resource pool usage stats.
 type LicenseSize struct {
-	AuditLicenseSize string `db:"audit_license_size"`
+	AuditLicenseSize string `db:"GET_COMPLIANCE_STATUS"`
 }
 
 // NewPoolUsage returns a list of pool usage stats.
 func NewLicenseSize(db *sqlx.DB) []LicenseSize {
 	sql := `
-	SELECT audit_license_size();
+	SELECT GET_COMPLIANCE_STATUS();
 	`
 
 	licenseSize := []LicenseSize{}
