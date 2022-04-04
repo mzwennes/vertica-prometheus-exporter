@@ -74,7 +74,7 @@ docker pull docker.pkg.github.com/zwennesm/vertica-prometheus-exporter/vertica-p
 Then run the docker image with optional `environment variables`:
 
 ```
-docker run --rm --network host --name vertica-prometheus-exporter \
+docker run --rm --network vertica -p 8080:8080 --name vertica-prometheus-exporter \
       -e DB_NAME=docker \
       vertica-prometheus-exporter:latest
 ```
@@ -96,7 +96,5 @@ tar -xvf vertica-prometheus-exporter_v0.3_linux_386.tar.gz
 A local Vertica database can be deployed for testing using the following command:
 
 ```
-docker run --name vertica --network host -p 5433:5433 -d jbfavre/vertica:9.2.0-7_debian-8
+docker compose up
 ```
-
-Note: The default database name is `docker`.

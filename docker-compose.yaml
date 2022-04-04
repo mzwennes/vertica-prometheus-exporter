@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  vertica:
+    environment:
+      APP_DB_USER: "vertica"
+      APP_DB_PASSWORD: "vertica"
+      TZ: "Europe/Amsterdam"
+    image: vertica/vertica-ce:11.1.0-0
+    ports:
+      - "5433:5433"
+    networks:
+      - vertica
+
+  exporter:
+    environment:
+      - DB_NAME=VMart
+      - DB_HOST=vertica
+      - DB_USER=vertica
+      - DB_PASSWORD=vertica
+    restart: on-failure
+    build: .
+    networks:
+      - vertica
+    ports:
+      - "8080:8080"
+
+networks:
+  vertica: {}

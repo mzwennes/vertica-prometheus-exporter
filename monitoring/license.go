@@ -9,16 +9,14 @@ import (
 	"github.com/jmoiron/sqlx"
 )
 
-// PoolUsage shows gneral resource pool usage stats.
+// LicenceSize shows the restrictions of the Vertica licence.
 type LicenseSize struct {
 	AuditLicenseSize string `db:"GET_COMPLIANCE_STATUS"`
 }
 
-// NewPoolUsage returns a list of pool usage stats.
+// NewLicenceSize returns a list of licences (only a single row)
 func NewLicenseSize(db *sqlx.DB) []LicenseSize {
-	sql := `
-	SELECT GET_COMPLIANCE_STATUS();
-	`
+	sql := `SELECT GET_COMPLIANCE_STATUS();`
 
 	licenseSize := []LicenseSize{}
 	err := db.Select(&licenseSize, sql)
@@ -29,7 +27,7 @@ func NewLicenseSize(db *sqlx.DB) []LicenseSize {
 	return licenseSize
 }
 
-// ToMetric converts PoolUsage to a Map.
+// ToMetric converts LicenceSize to a Map.
 func (licenseSize LicenseSize) ToMetric() map[string]float32 {
 	metrics := map[string]float32{}
 
