@@ -35,12 +35,12 @@ func NewQueryRequests(db *sqlx.DB) []QueryRequest {
 }
 
 // ToMetric converts QueryRequest to a Map.
-func (qr QueryRequest) ToMetric() map[string]int {
-	metrics := map[string]int{}
+func (qr QueryRequest) ToMetric() map[string]float32 {
+	metrics := map[string]float32{}
 
 	username := fmt.Sprintf("user_name=%q", qr.UserName)
-	metrics[fmt.Sprintf("vertica_request_duration_ms{%s}", username)] = qr.RequestDurationMS
-	metrics[fmt.Sprintf("vertica_memory_acquired_mb{%s}", username)] = qr.MemoryAcquiredMB
+	metrics[fmt.Sprintf("vertica_request_duration_ms{%s}", username)] = float32(qr.RequestDurationMS)
+	metrics[fmt.Sprintf("vertica_memory_acquired_mb{%s}", username)] = float32(qr.MemoryAcquiredMB)
 
 	return metrics
 }

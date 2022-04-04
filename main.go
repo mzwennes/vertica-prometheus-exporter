@@ -41,7 +41,7 @@ func serveMetrics(location, listen string, db sqlx.DB) {
 		for _, obj := range metrics {
 			metric := obj.ToMetric()
 			for key, value := range metric {
-				fmt.Fprintf(w, "%s %d\n", key, value)
+				fmt.Fprintf(w, "%s %.2f\n", key, value)
 			}
 		}
 	}

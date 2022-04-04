@@ -1,14 +1,15 @@
 package monitoring
 
 import (
-	"github.com/jmoiron/sqlx"
 	"regexp"
 	"strings"
+
+	"github.com/jmoiron/sqlx"
 )
 
 // PrometheusMetric maps a struct to a Prometheus valid map.
 type PrometheusMetric interface {
-	ToMetric() map[string]int
+	ToMetric() map[string]float32
 }
 
 func NewPrometheusMetrics(db sqlx.DB) []PrometheusMetric {
@@ -25,6 +26,12 @@ func NewPrometheusMetrics(db sqlx.DB) []PrometheusMetric {
 	}
 	for _, usage := range NewPoolUsage(&db) {
 		metrics = append(metrics, usage)
+	}
+	for _, schemaSize := range NewSchemaSize(&db) {
+		metrics = append(metrics, schemaSize)
+	}
+	for _, licenseSize := range NewLicenseSize(&db) {
+		metrics = append(metrics, licenseSize)
 	}
 	metrics = append(metrics, NewVerticaSystem(&db))
 
